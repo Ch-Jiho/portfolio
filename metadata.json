@@ -1,0 +1,6 @@
+{
+  "name": "최지호 포트폴리오 | Jiho Choi Portfolio",
+  "description": "FastAPI, AI 시스템 연동, 다국어 에이전트 및 바이브 코딩 풀스택 개발자 최지호의 포트폴리오 웹사이트",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
