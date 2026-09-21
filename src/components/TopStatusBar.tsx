@@ -69,8 +69,24 @@ export const TopStatusBar: React.FC<TopStatusBarProps> = ({
         <div className="flex items-center gap-3">
           {/* Mobile Identity */}
           <div className="flex lg:hidden items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 font-bold text-xs">
-              CJ
+            <div className="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 font-bold text-xs overflow-hidden">
+              {personalInfo.avatarUrl ? (
+                <img
+                  src={personalInfo.avatarUrl}
+                  alt={lang === 'ko' ? personalInfo.nameKo : personalInfo.nameEn}
+                  className="w-full h-full rounded-full object-cover"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.dataset.triedFallback) {
+                      target.dataset.triedFallback = 'true';
+                      target.src = 'https://raw.githubusercontent.com/Ch-Jiho/portfolio/5ace50d3f0df847202cd611cf80986bb2ce0e257/%EC%B5%9C%EC%A7%80%ED%98%B8(24%EB%85%84).jpg';
+                    }
+                  }}
+                />
+              ) : (
+                'CJ'
+              )}
             </div>
             <span className="font-semibold text-sm text-white">
               {lang === 'ko' ? personalInfo.nameKo : personalInfo.nameEn}

@@ -82,12 +82,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
           <div className="relative group">
             {/* Glowing ring around avatar */}
             <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-400 opacity-70 blur-xs group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-zinc-900 border-2 border-zinc-800 p-1 flex items-center justify-center shadow-xl">
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-zinc-800 to-zinc-950 flex items-center justify-center text-2xl sm:text-3xl font-bold text-white tracking-wider">
-                <span className="bg-gradient-to-r from-blue-400 to-indigo-300 bg-clip-text text-transparent">
-                  CJ
-                </span>
-              </div>
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-zinc-900 border-2 border-zinc-800 p-0.5 flex items-center justify-center shadow-xl overflow-hidden">
+              {personalInfo.avatarUrl ? (
+                <img
+                  src={personalInfo.avatarUrl}
+                  alt={lang === 'ko' ? personalInfo.nameKo : personalInfo.nameEn}
+                  className="w-full h-full rounded-full object-cover"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    // Fallback to direct github raw url if local file fails
+                    const target = e.currentTarget;
+                    if (!target.dataset.triedFallback) {
+                      target.dataset.triedFallback = 'true';
+                      target.src = 'https://raw.githubusercontent.com/Ch-Jiho/portfolio/5ace50d3f0df847202cd611cf80986bb2ce0e257/%EC%B5%9C%EC%A7%80%ED%98%B8(24%EB%85%84).jpg';
+                    }
+                  }}
+                />
+              ) : (
+                <div className="w-full h-full rounded-full bg-gradient-to-br from-zinc-800 to-zinc-950 flex items-center justify-center text-2xl sm:text-3xl font-bold text-white tracking-wider">
+                  <span className="bg-gradient-to-r from-blue-400 to-indigo-300 bg-clip-text text-transparent">
+                    CJ
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -102,16 +119,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
 
         {/* Main Display Headline (matching reference image) */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-8">
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.15]">
+          <h1 className="text-2xl min-[380px]:text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.2] break-keep">
             {lang === 'ko' ? (
               <>
-                안녕하세요, 저는 <span className="text-blue-400">최지호</span>입니다 <br className="hidden sm:inline" />
-                디지털 프로덕트와 AI 시스템을 구축합니다
+                <span className="whitespace-nowrap inline-block">
+                  안녕하세요, 저는 <span className="text-blue-400">최지호</span>입니다.
+                </span>
+                <br />
+                <span className="whitespace-nowrap inline-block">
+                  디지털프로덕트와 AI시스템을
+                </span>
+                <br />
+                구축합니다.
               </>
             ) : (
               <>
-                Hello, I Am <span className="text-blue-400">Jiho</span> — I Build <br className="hidden sm:inline" />
-                Digital Products & AI Systems
+                <span className="whitespace-nowrap inline-block">
+                  Hello, I Am <span className="text-blue-400">Jiho</span>
+                </span>
+                <br />
+                I Build Digital Products &
+                <br />
+                AI Systems
               </>
             )}
           </h1>

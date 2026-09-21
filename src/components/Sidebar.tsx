@@ -48,9 +48,25 @@ export const Sidebar: React.FC<SidebarProps> = ({ lang, activeSection }) => {
         <div className="flex items-center gap-3.5 pb-4 border-b border-zinc-800/60">
           <div className="relative">
             <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500/40 p-0.5 bg-gradient-to-tr from-blue-600 to-indigo-500 shadow-md shadow-blue-500/20">
-              <div className="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-blue-400 font-bold text-lg">
-                CJ
-              </div>
+              {personalInfo.avatarUrl ? (
+                <img
+                  src={personalInfo.avatarUrl}
+                  alt={lang === 'ko' ? personalInfo.nameKo : personalInfo.nameEn}
+                  className="w-full h-full rounded-full object-cover"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.dataset.triedFallback) {
+                      target.dataset.triedFallback = 'true';
+                      target.src = 'https://raw.githubusercontent.com/Ch-Jiho/portfolio/5ace50d3f0df847202cd611cf80986bb2ce0e257/%EC%B5%9C%EC%A7%80%ED%98%B8(24%EB%85%84).jpg';
+                    }
+                  }}
+                />
+              ) : (
+                <div className="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-blue-400 font-bold text-lg">
+                  CJ
+                </div>
+              )}
             </div>
             <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-zinc-950 rounded-full animate-pulse" />
           </div>

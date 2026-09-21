@@ -70,10 +70,26 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
           <div className="lg:col-span-5 rounded-2xl bg-[#0e0e12] border border-zinc-800/80 p-6 sm:p-8 space-y-6 shadow-xl">
             {/* Profile Header */}
             <div className="flex items-center gap-4 pb-6 border-b border-zinc-800/80">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 p-0.5 shadow-lg shadow-blue-500/20">
-                <div className="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-blue-400 font-bold text-xl">
-                  CJ
-                </div>
+              <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 p-0.5 shadow-lg shadow-blue-500/20 overflow-hidden">
+                {personalInfo.avatarUrl ? (
+                  <img
+                    src={personalInfo.avatarUrl}
+                    alt={lang === 'ko' ? personalInfo.nameKo : personalInfo.nameEn}
+                    className="w-full h-full rounded-full object-cover"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (!target.dataset.triedFallback) {
+                        target.dataset.triedFallback = 'true';
+                        target.src = 'https://raw.githubusercontent.com/Ch-Jiho/portfolio/5ace50d3f0df847202cd611cf80986bb2ce0e257/%EC%B5%9C%EC%A7%80%ED%98%B8(24%EB%85%84).jpg';
+                      }
+                    }}
+                  />
+                ) : (
+                  <div className="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-blue-400 font-bold text-xl">
+                    CJ
+                  </div>
+                )}
               </div>
 
               <div>

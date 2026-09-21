@@ -24,6 +24,7 @@ export const personalInfo = {
   phone: '(+82) 010-3977-3730',
   email: 'zihocleo@gmail.com',
   githubUrl: 'https://github.com/Ch-Jiho',
+  avatarUrl: '/profile.jpg',
   locationKo: '대한민국 부산광역시',
   locationEn: 'Busan, South Korea',
   availabilityKo: '새로운 프로젝트 및 협업 가능',
